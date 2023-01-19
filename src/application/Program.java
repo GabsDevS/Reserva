@@ -40,17 +40,16 @@ public class Program {
 			System.out.print("Check-Out date (dd/MM/YYYY): ");
 			checkOut = sdf.parse(sc.nextLine());
 			
-			Date now= new Date();
-			if (checkIn.before(now) || checkOut.before(now)) {
-				System.out.println("Erro na reserva, utilize datas futuras ! ");
-			}
-			else if (!checkOut.after(checkIn)) {
-				System.out.println("Erro na reserva, a data de saida tem que ser posterior a de entrada !");
+
+			String error = reserva.updateDates(checkIn, checkOut);
+			
+			if (error != null) {
+				System.out.println("Erro na reserva: " + error);
 			}
 			else {
-				reserva.updateDates(checkIn, checkOut);
 				System.out.println("Reserva atualizada: " + reserva);
 			}
+			
 			
 		}
 		
